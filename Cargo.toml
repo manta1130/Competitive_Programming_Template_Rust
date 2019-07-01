@@ -1,0 +1,7 @@
+[package]
+name = "atcoder-tmp"
+version = "0.1.0"
+authors = ["manta"]
+edition = "2018"
+
+[dependencies]
