@@ -1,1 +1,31 @@
-# AtCoder_Template_Rust
+# Competitive_Template_Rust
+AtCoderとかの競技プログラミングでRustでの標準入力を簡単にする関数とマクロです。
+
+## input_line_str関数
+標準入力から一行読み込んでStringに変換します。
+改行文字は除去されています。
+```Rust
+let s = input_line_str();
+```
+
+## inputマクロ
+標準入力から一行読み込み数値に変換します。
+```Rust
+let a:i32;
+let b:i32;
+let c:f64;
+
+//標準入力に"4"が入力されると変数aに4が代入されます。
+input!(a);
+
+//標準入力に"2 4.3"が入力されると変数bに2,変数cに4.3が代入されます。
+input!(b,c);
+```
+
+## input_vector関数
+標準入力から指定した行数を読み込み二次元配列に変換します。
+```Rust
+let a:Vec<Vec<isize>>;
+//10行読み込む
+a = input_vector(10);
+```
