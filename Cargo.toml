@@ -1,7 +1,7 @@
 [package]
-name = "atcoder-tmp"
+name = "competitive_template_rust"
 version = "0.1.0"
-authors = ["manta"]
+authors = ["manta1130"]
 edition = "2018"
 
 [dependencies]
