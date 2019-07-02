@@ -1,22 +1,27 @@
 use std::io;
 
+macro_rules! input {
+    ( $($x:expr ),*) => {
+        {
+            let temp_str = input_line_str();
+            let mut split_result_iter = temp_str.split_whitespace();
+                $(
+                let buf_split_result = split_result_iter.next();
+                let buf_split_result = buf_split_result.unwrap();
+                    ($x) = buf_split_result.parse().unwrap();
+                )*
+        }
+    };
+}
+
+#[allow(dead_code)]
 fn input_line_str() -> String {
     let mut s = String::new();
     io::stdin().read_line(&mut s).unwrap();
     s.trim().to_string()
 }
 
-fn input_line_number<T>() -> T
-where
-    T: std::str::FromStr,
-{
-    let s = input_line_str();
-    match s.parse() {
-        Ok(r) => r,
-        Err(_) => panic!("Parse Error"),
-    }
-}
-
+#[allow(dead_code)]
 fn input_vector<T>(line: usize) -> Vec<Vec<T>>
 where
     T: std::str::FromStr,
@@ -40,5 +45,4 @@ where
 }
 
 fn main() {
-      
 }
