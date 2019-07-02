@@ -1,5 +1,6 @@
 use std::io;
 
+#[allow(unused_macros)]
 macro_rules! input {
     ( $($x:expr ),*) => {
         {
