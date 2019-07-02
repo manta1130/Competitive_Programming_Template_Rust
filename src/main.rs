@@ -1,5 +1,9 @@
 use std::io;
 
+fn main() {
+
+}
+
 #[allow(unused_macros)]
 macro_rules! input {
     ( $($x:expr ),*) => {
@@ -93,7 +97,4 @@ where
         v.push(vec_line);
     }
     v
-}
-
-fn main() {
 }
