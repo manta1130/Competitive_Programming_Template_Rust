@@ -46,4 +46,3 @@ let a = str2vec("abc");
 let b = str2vec(&input_line_str());
 //標準入力に入力した文字列を配列に変換
 
-```
