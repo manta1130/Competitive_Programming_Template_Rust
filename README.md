@@ -1,4 +1,4 @@
-# Competitive_Template_Rust
+# Competitive_Programming_Template_Rust
 AtCoderとかの競技プログラミングでRustでの標準入力を簡単にする関数とマクロです。
 
 ## input_line_str関数
