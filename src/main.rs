@@ -66,6 +66,7 @@ where
     v
 }
 
+#[allow(dead_code)]
 fn str2vec(s: &str) -> Vec<char> {
     let mut v: Vec<char> = Vec::new();
     for c in s.chars() {
