@@ -33,7 +33,7 @@ where
 
     for _ in 0..line {
         let s = input_line_str();
-        let split_result = s.split_whitespace();
+        let split_result = s.split(SPLIT_DELIMITER);
         let mut vec_line: Vec<T> = Vec::new();
         for z in split_result {
             let buf = match z.parse() {
