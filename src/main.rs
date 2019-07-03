@@ -1,8 +1,6 @@
 use std::io;
 
-fn main() {
-
-}
+const SPLIT_DELIMITER: char = ' ';
 
 #[allow(unused_macros)]
 macro_rules! input {
