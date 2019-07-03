@@ -1,13 +1,6 @@
 # Competitive_Programming_Template_Rust
 AtCoderとかの競技プログラミングでRustでの標準入力を簡単にする関数とマクロです。
 
-## input_line_str関数
-標準入力から一行読み込んでStringに変換します。
-改行文字は除去されています。
-```Rust
-let s = input_line_str();
-```
-
 ## inputマクロ
 標準入力から一行読み込み数値に変換します。
 ```Rust
