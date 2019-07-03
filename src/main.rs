@@ -1,5 +1,7 @@
 use std::io;
 
+const SPLIT_DELIMITER: char = ' ';
+
 #[allow(unused_macros)]
 macro_rules! input {
     ( $($x:expr ),*) => {
@@ -41,6 +43,25 @@ where
             vec_line.push(buf);
         }
         v.push(vec_line);
+    }
+    v
+}
+
+#[allow(dead_code)]
+fn input_vector<T>() -> Vec<T>
+where
+    T: std::str::FromStr,
+{
+    let mut v: Vec<T> = Vec::new();
+
+    let s = input_line_str();
+    let split_result = s.split(SPLIT_DELIMITER);
+    for z in split_result {
+        let buf = match z.parse() {
+            Ok(r) => r,
+            Err(_) => panic!("Parse Error"),
+        };
+        v.push(buf);
     }
     v
 }
