@@ -23,7 +23,7 @@ fn input_line_str() -> String {
 }
 
 #[allow(dead_code)]
-fn input_vector<T>(line: usize) -> Vec<Vec<T>>
+fn input_vector2d<T>(line: usize) -> Vec<Vec<T>>
 where
     T: std::str::FromStr,
 {
