@@ -22,10 +22,17 @@ input!(a);
 input!(b,c);
 ```
 
-## input_vector関数
-標準入力から指定した行数を読み込み二次元配列に変換します。
+## input_vector2d関数
+標準入力から指定した行数を読み込み二次元配列(Vec)に変換します。
 ```Rust
 let a:Vec<Vec<isize>>;
 //10行読み込む
-a = input_vector(10);
+a = input_vector2d(10);
+```
+
+## input_vector関数
+標準入力から一行読み込み配列(Vec)に変換します。
+```Rust
+let a:Vec<isize>;
+a = input_vector();
 ```
