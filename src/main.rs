@@ -1,5 +1,7 @@
 use std::io;
 
+const SPLIT_DELIMITER: char = ' ';
+
 #[allow(unused_macros)]
 macro_rules! input {
     ( $($x:expr ),*) => {
@@ -23,7 +25,7 @@ fn input_line_str() -> String {
 }
 
 #[allow(dead_code)]
-fn input_vector<T>(line: usize) -> Vec<Vec<T>>
+fn input_vector2d<T>(line: usize) -> Vec<Vec<T>>
 where
     T: std::str::FromStr,
 {
@@ -31,7 +33,7 @@ where
 
     for _ in 0..line {
         let s = input_line_str();
-        let split_result = s.split_whitespace();
+        let split_result = s.split(SPLIT_DELIMITER);
         let mut vec_line: Vec<T> = Vec::new();
         for z in split_result {
             let buf = match z.parse() {
@@ -41,6 +43,34 @@ where
             vec_line.push(buf);
         }
         v.push(vec_line);
+    }
+    v
+}
+
+#[allow(dead_code)]
+fn input_vector<T>() -> Vec<T>
+where
+    T: std::str::FromStr,
+{
+    let mut v: Vec<T> = Vec::new();
+
+    let s = input_line_str();
+    let split_result = s.split(SPLIT_DELIMITER);
+    for z in split_result {
+        let buf = match z.parse() {
+            Ok(r) => r,
+            Err(_) => panic!("Parse Error"),
+        };
+        v.push(buf);
+    }
+    v
+}
+
+#[allow(dead_code)]
+fn str2vec(s: &str) -> Vec<char> {
+    let mut v: Vec<char> = Vec::new();
+    for c in s.chars() {
+        v.push(c);
     }
     v
 }
