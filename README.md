@@ -36,3 +36,14 @@ a = input_vector2d(10);
 let a:Vec<isize>;
 a = input_vector();
 ```
+
+## str2vec関数
+文字列を配列(Vec<char>)に変換します。
+```Rust
+let a = str2vec("abc");
+//['a','b','c']
+
+let b = str2vec(&input_line_str());
+//標準入力に入力した文字列を配列に変換
+
+```

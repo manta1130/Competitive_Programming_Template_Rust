@@ -33,7 +33,7 @@ where
 
     for _ in 0..line {
         let s = input_line_str();
-        let split_result = s.split_whitespace();
+        let split_result = s.split(SPLIT_DELIMITER);
         let mut vec_line: Vec<T> = Vec::new();
         for z in split_result {
             let buf = match z.parse() {
@@ -62,6 +62,15 @@ where
             Err(_) => panic!("Parse Error"),
         };
         v.push(buf);
+    }
+    v
+}
+
+#[allow(dead_code)]
+fn str2vec(s: &str) -> Vec<char> {
+    let mut v: Vec<char> = Vec::new();
+    for c in s.chars() {
+        v.push(c);
     }
     v
 }
