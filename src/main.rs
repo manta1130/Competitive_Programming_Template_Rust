@@ -66,5 +66,13 @@ where
     v
 }
 
+fn str2vec(s: &str) -> Vec<char> {
+    let mut v: Vec<char> = Vec::new();
+    for c in s.chars() {
+        v.push(c);
+    }
+    v
+}
+
 fn main() {
 }
