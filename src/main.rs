@@ -75,3 +75,6 @@ fn str2vec(s: &str) -> Vec<char> {
     v
 }
 
+fn main() {
+}
+

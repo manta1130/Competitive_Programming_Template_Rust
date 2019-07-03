@@ -22,7 +22,6 @@ input!(a);
 input!(b,c);
 ```
 
-<<<<<<< HEAD
 ## input_line_str関数
 標準入力から一行読み込んでStringに変換します。
 改行文字は除去します。
