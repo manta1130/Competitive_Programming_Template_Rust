@@ -1,6 +1,5 @@
 use std::io;
 
-const SPLIT_DELIMITER: char = ' ';
 
 #[allow(unused_macros)]
 macro_rules! input {
@@ -24,6 +23,7 @@ fn input_line_str() -> String {
     s.trim().to_string()
 }
 
+const SPLIT_DELIMITER: char = ' ';
 #[allow(dead_code)]
 fn input_vector2d<T>(line: usize) -> Vec<Vec<T>>
 where
