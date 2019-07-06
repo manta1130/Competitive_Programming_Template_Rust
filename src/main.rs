@@ -1,6 +1,5 @@
 use std::io;
 
-
 #[allow(unused_macros)]
 macro_rules! input {
     ( $($x:expr ),*) => {
@@ -21,6 +20,14 @@ fn input_line_str() -> String {
     let mut s = String::new();
     io::stdin().read_line(&mut s).unwrap();
     s.trim().to_string()
+}
+
+#[allow(dead_code)]
+fn p<T>(t: T)
+where
+    T: std::fmt::Display,
+{
+    println!("{}", t);
 }
 
 const SPLIT_DELIMITER: char = ' ';
@@ -67,5 +74,4 @@ fn str2vec(s: &str) -> Vec<char> {
 }
 
 fn main() {
-    
 }
