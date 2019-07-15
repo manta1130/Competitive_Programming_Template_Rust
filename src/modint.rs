@@ -1,23 +1,27 @@
+//mod modint {
+
+use std;
 use std::fmt;
 use std::ops;
 
 #[derive(PartialEq, Eq, Debug, Clone)]
-struct Modint {
-    p: usize, //modint
+pub struct Modint {
+    p: usize, //
     v: usize,
 }
 
 impl Modint {
     #[allow(dead_code)]
-    fn new(p: usize) -> Modint {
+    pub fn new(p: usize) -> Modint {
         Modint { p, v: 0 }
     }
     #[allow(dead_code)]
-    fn from(p: usize, v: usize) -> Modint {
-        Modint { p, v }
+    pub fn from(p: usize, v: usize) -> Modint {
+        Modint { p, v: v % p }
     }
 }
 
+//print用
 impl fmt::Display for Modint {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.v)
@@ -88,14 +92,14 @@ impl ops::Div for &Modint {
 
 impl Modint {
     #[allow(dead_code)]
-    fn add_uint(&mut self, n: usize) -> &Self {
+    pub fn add_uint(&mut self, n: usize) -> &Self {
         self.v += n;
         self.v %= self.p;
         self
     }
 
     #[allow(dead_code)]
-    fn sub_uint(&mut self, mut n: usize) -> &Self {
+    pub fn sub_uint(&mut self, mut n: usize) -> &Self {
         n = n % self.p;
         self.v += self.p;
         self.v -= n;
@@ -104,14 +108,14 @@ impl Modint {
     }
 
     #[allow(dead_code)]
-    fn mul_uint(&mut self, n: usize) -> &Self {
+    pub fn mul_uint(&mut self, n: usize) -> &Self {
         self.v *= n;
         self.v %= self.p;
         self
     }
 
     #[allow(dead_code)]
-    fn div_uint(&mut self, n: usize) -> &Self {
+    pub fn div_uint(&mut self, n: usize) -> &Self {
         let mut obj = Modint::from(self.p, n);
         obj.inv();
         self.v *= obj.v;
@@ -120,14 +124,14 @@ impl Modint {
     }
 
     #[allow(dead_code)]
-    fn inv(&mut self) -> &Self {
+    pub fn inv(&mut self) -> &Self {
         let p = self.p;
         self.pow(p - 2);
         self
     }
 
     #[allow(dead_code)]
-    fn pow(&mut self, mut n: usize) -> &Self {
+    pub fn pow(&mut self, mut n: usize) -> &Self {
         let mut temp = self.v;
         self.v = 1;
         while n > 0 {
@@ -143,14 +147,18 @@ impl Modint {
     }
 }
 
-struct DPFactorial {
+pub struct DPFactorial {
     p: usize,
     normal: Vec<Modint>,
     inv: Vec<Modint>,
 }
 impl DPFactorial {
+    /// ```
+    /// let mut obj=DPFactorial::new();
+    /// assert_eq!(obj.get_factorial(3),6);
+    /// ```
     #[allow(dead_code)]
-    fn new(p: usize) -> DPFactorial {
+    pub fn new(p: usize) -> DPFactorial {
         let mut obj = DPFactorial {
             p,
             normal: Vec::new(),
@@ -162,7 +170,7 @@ impl DPFactorial {
     }
 
     #[allow(dead_code)]
-    fn get_factorial(&mut self, n: usize) -> Modint {
+    pub fn get_factorial(&mut self, n: usize) -> Modint {
         if n < self.normal.len() {
             return self.normal[n].clone();
         }
@@ -176,7 +184,7 @@ impl DPFactorial {
     }
 
     #[allow(dead_code)]
-    fn get_factorial_inv(&mut self, n: usize) -> Modint {
+    pub fn get_factorial_inv(&mut self, n: usize) -> Modint {
         if n < self.inv.len() {
             return self.inv[n].clone();
         }
@@ -190,7 +198,7 @@ impl DPFactorial {
     }
 
     #[allow(dead_code)]
-    fn get_combination(&mut self, n: usize, r: usize) -> Modint {
+    pub fn get_combination(&mut self, n: usize, r: usize) -> Modint {
         if n < r {
             return Modint::from(self.p, 0);
         }
@@ -198,12 +206,11 @@ impl DPFactorial {
     }
 
     #[allow(dead_code)]
-    fn get_permutation(&mut self, n: usize, r: usize) -> Modint {
+    pub fn get_permutation(&mut self, n: usize, r: usize) -> Modint {
         if n < r {
             return Modint::from(self.p, 0);
         }
         &self.get_factorial(n) * &(self.get_factorial_inv(n - r))
     }
 }
-
-fn main() {}
+//}
