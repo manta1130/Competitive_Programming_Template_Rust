@@ -1,6 +1,6 @@
 [package]
-name = "competitive_template_rust"
-version = "0.1.0"
+name = "cp_template"
+version = "0.2.0"
 authors = ["manta1130"]
 edition = "2018"
 
