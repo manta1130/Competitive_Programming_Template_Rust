@@ -2,13 +2,17 @@
 
 use std;
 use std::fmt;
+use std::num::ParseIntError;
 use std::ops;
+use std::str::FromStr;
 
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub struct Modint {
     p: usize, //
     v: usize,
 }
+
+const DEFAULT_MODNUM: usize = 1_000_000_007;
 
 impl Modint {
     #[allow(dead_code)]
@@ -18,6 +22,19 @@ impl Modint {
     #[allow(dead_code)]
     pub fn from(p: usize, v: usize) -> Modint {
         Modint { p, v: v % p }
+    }
+}
+
+impl FromStr for Modint {
+    type Err = ParseIntError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let num: usize;
+        num = s.parse()?;
+        Ok(Modint {
+            p: DEFAULT_MODNUM,
+            v: num,
+        })
     }
 }
 
