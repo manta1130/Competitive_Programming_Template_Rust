@@ -17,11 +17,11 @@ const DEFAULT_MODNUM: usize = 1_000_000_007;
 impl Modint {
     #[allow(dead_code)]
     pub fn new(p: usize) -> Modint {
-        Modint { p, v: 0 }
+        Modint { p: p, v: 0 }
     }
     #[allow(dead_code)]
     pub fn from(p: usize, v: usize) -> Modint {
-        Modint { p, v: v % p }
+        Modint { p: p, v: v % p }
     }
 }
 
@@ -40,17 +40,17 @@ impl FromStr for Modint {
 
 //print用
 impl fmt::Display for Modint {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    fn fmt<'a>(&self, f: &mut fmt::Formatter<'a>) -> fmt::Result {
         write!(f, "{}", self.v)
     }
 }
 
 //演算子関係
-impl ops::Add for &Modint {
+impl<'a> ops::Add for &'a Modint {
     type Output = Modint;
 
     #[allow(dead_code)]
-    fn add(self, other: &Modint) -> Modint {
+    fn add(self, other: &'a Modint) -> Modint {
         if self.p != other.p {
             panic!("Mod Error");
         }
@@ -61,11 +61,11 @@ impl ops::Add for &Modint {
     }
 }
 
-impl ops::Sub for &Modint {
+impl<'a> ops::Sub for &'a Modint {
     type Output = Modint;
 
     #[allow(dead_code)]
-    fn sub(self, other: &Modint) -> Modint {
+    fn sub(self, other: &'a Modint) -> Modint {
         if self.p != other.p {
             panic!("Mod Error");
         }
@@ -76,11 +76,11 @@ impl ops::Sub for &Modint {
     }
 }
 
-impl ops::Mul for &Modint {
+impl<'a> ops::Mul for &'a Modint {
     type Output = Modint;
 
     #[allow(dead_code)]
-    fn mul(self, other: &Modint) -> Modint {
+    fn mul(self, other: &'a Modint) -> Modint {
         if self.p != other.p {
             panic!("Mod Error");
         }
@@ -91,10 +91,10 @@ impl ops::Mul for &Modint {
     }
 }
 
-impl ops::Div for &Modint {
+impl<'a> ops::Div for &'a Modint {
     type Output = Modint;
 
-    fn div(self, other: &Modint) -> Modint {
+    fn div(self, other: &'a Modint) -> Modint {
         if self.p != other.p {
             panic!("Mod Error");
         }
@@ -173,7 +173,7 @@ impl DPFactorial {
     #[allow(dead_code)]
     pub fn new(p: usize) -> DPFactorial {
         let mut obj = DPFactorial {
-            p,
+            p: p,
             normal: Vec::new(),
             inv: Vec::new(),
         };
