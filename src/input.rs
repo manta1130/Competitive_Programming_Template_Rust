@@ -1,9 +1,20 @@
+//提出時は下二行と一番下のコメントアウトを外す。
 //#[macro_use]
 //mod input {
 
 use std;
 use std::io;
 
+const SPLIT_DELIMITER: char = ' ';
+
+/// 空白で区切られた複数の値の読み込む。
+/// # Example
+/// ```ignore
+/// use cp_template::*;
+///
+/// let (a,b):(usize,usize);
+/// input!(a,b);
+/// ```
 #[macro_export]
 #[allow(unused_macros)]
 macro_rules! input {
@@ -20,6 +31,13 @@ macro_rules! input {
     };
 }
 
+/// 文字列を一行読み込む
+/// # Example
+/// ```ignore
+/// use cp_template::*;
+///
+/// let s = input_line_str();
+/// ```
 #[allow(dead_code)]
 pub fn input_line_str() -> String {
     let mut s = String::new();
@@ -27,6 +45,15 @@ pub fn input_line_str() -> String {
     s.trim().to_string()
 }
 
+/// 一つの変数を出力する。
+/// ```
+/// use cp_template::*;
+///
+/// let a=100;
+/// p(a);
+/// //上と下は等価です。
+/// println!("{}",a);
+/// ```
 #[allow(dead_code)]
 pub fn p<T>(t: T)
 where
@@ -35,7 +62,14 @@ where
     println!("{}", t);
 }
 
-const SPLIT_DELIMITER: char = ' ';
+/// 指定した行数を読み込み、二次元配列に変換する。
+/// # Examples
+/// ```ignore
+/// use cp_template::*;
+///
+/// //10行読み込む。
+/// let v = input_vector2d::<usize>(10);
+/// ```
 #[allow(dead_code)]
 pub fn input_vector2d<T>(line: usize) -> Vec<Vec<T>>
 where
@@ -50,6 +84,13 @@ where
     v
 }
 
+/// 一行読み込み、配列(Vec)に変換する。
+/// # Examples
+/// ```ignore
+/// use cp_template::*;
+///
+/// let v=input_vector::<usize>();
+/// ```
 #[allow(dead_code)]
 pub fn input_vector<T>() -> Vec<T>
 where
@@ -69,6 +110,15 @@ where
     v
 }
 
+/// String(str)を配列(Vec<char>)に変換する。
+/// # Examples
+/// ```ignore
+/// use cp_template::*;
+///
+/// let s = String::from("abc");
+/// let v = str2vec(&s);
+/// let v = str2vec(&input_line_str());
+/// ```
 #[allow(dead_code)]
 pub fn str2vec(s: &str) -> Vec<char> {
     let mut v: Vec<char> = Vec::new();

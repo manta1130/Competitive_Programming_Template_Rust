@@ -153,10 +153,6 @@ pub struct DPFactorial {
     inv: Vec<Modint>,
 }
 impl DPFactorial {
-    /// ```
-    /// let mut obj=DPFactorial::new();
-    /// assert_eq!(obj.get_factorial(3),6);
-    /// ```
     #[allow(dead_code)]
     pub fn new(p: usize) -> DPFactorial {
         let mut obj = DPFactorial {
