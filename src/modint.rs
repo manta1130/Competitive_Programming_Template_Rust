@@ -162,6 +162,11 @@ impl Modint {
         }
         self
     }
+
+    #[allow(dead_code)]
+    pub fn get_value(&self) -> usize {
+        self.v
+    }
 }
 
 pub struct DPFactorial {
