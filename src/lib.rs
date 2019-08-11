@@ -9,3 +9,7 @@ pub use modint::*;
 /// 素数関係のライブラリ
 pub mod prime_number;
 pub use prime_number::*;
+
+///グラフ関係のライブラリ
+pub mod graph;
+pub use graph::*;

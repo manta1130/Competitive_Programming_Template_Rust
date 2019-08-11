@@ -9,6 +9,9 @@ use input::*;
 use modint::*;
 #[allow(unused_imports)]
 use prime_number::*;
+#[allow(unused_imports)]
+use graph::*;
+
 
 fn main() {
 }
