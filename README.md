@@ -1,6 +1,8 @@
 # Competitive_Programming_Template_Rust
 AtCoderとかの競技プログラミングでRustでの標準入力を簡単にする関数とマクロです。
 
+ドキュメント:https://manta1130.github.io/Competitive_Programming_Template_Rust/cp_template/
+
 ## inputマクロ
 標準入力から一行読み込み数値に変換します。
 ```Rust
