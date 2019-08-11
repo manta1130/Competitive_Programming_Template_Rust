@@ -4,9 +4,14 @@ use cp_template::*;
 
 //提出用
 #[allow(unused_imports)]
+use input::*;
+#[allow(unused_imports)]
 use modint::*;
 #[allow(unused_imports)]
-use input::*;
+use prime_number::*;
+#[allow(unused_imports)]
+use graph::*;
+
 
 fn main() {
 }
