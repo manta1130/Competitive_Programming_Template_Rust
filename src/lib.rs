@@ -13,3 +13,11 @@ pub use prime_number::*;
 ///グラフ関係のライブラリ
 pub mod graph;
 pub use graph::*;
+
+///数学関係のライブラリ
+pub mod math;
+pub use math::*;
+
+///配列に関する補助関数ライブラリ
+pub mod vectools;
+pub use vectools::*;
