@@ -13,3 +13,7 @@ pub use prime_number::*;
 ///グラフ関係のライブラリ
 pub mod graph;
 pub use graph::*;
+
+///数学関係のライブラリ
+pub mod math;
+pub use math::*;
