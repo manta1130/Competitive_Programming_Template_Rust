@@ -110,22 +110,16 @@ where
     v
 }
 
-/// String(str)を配列(Vec<char>)に変換する。
-/// # Examples
-/// ```ignore
-/// use cp_template::*;
-///
-/// let s = String::from("abc");
-/// let v = str2vec(&s);
-/// let v = str2vec(&input_line_str());
-/// ```
-#[allow(dead_code)]
-pub fn str2vec(s: &str) -> Vec<char> {
-    let mut v: Vec<char> = Vec::new();
-    for c in s.chars() {
-        v.push(c);
+/// StringをVec<char>に変換するトレイト
+pub trait ToCharVec {
+    fn to_charvec(&self) -> Vec<char>;
+}
+
+#[allow(bare_trait_objects)]
+impl ToCharVec for String {
+    fn to_charvec(&self) -> Vec<char> {
+        self.to_string().chars().collect::<Vec<_>>()
     }
-    v
 }
 
 //}
