@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["gcd","最大公約数を求める。"],["lcm","最小公倍数を求める。"]]});
+initSidebarItems({"fn":[["extgcd","拡張ユーグリッドの互除法"],["gcd","最大公約数を求める。"],["lcm","最小公倍数を求める。"]]});
