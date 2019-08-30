@@ -110,12 +110,28 @@ where
     v
 }
 
+///　指定された行数を読み込む
+#[allow(dead_code)]
+pub fn input_vector_row<T>(n: usize) -> Vec<T>
+where
+    T: std::str::FromStr,
+{
+    let mut v = Vec::with_capacity(n);
+    for _ in 0..n {
+        let buf = match input_line_str().parse() {
+            Ok(r) => r,
+            Err(_) => panic!("Parse Error"),
+        };
+        v.push(buf);
+    }
+    v
+}
+
 /// StringをVec<char>に変換するトレイト
 pub trait ToCharVec {
     fn to_charvec(&self) -> Vec<char>;
 }
 
-#[allow(bare_trait_objects)]
 impl ToCharVec for String {
     fn to_charvec(&self) -> Vec<char> {
         self.to_string().chars().collect::<Vec<_>>()

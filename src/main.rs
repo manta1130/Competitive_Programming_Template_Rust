@@ -6,8 +6,6 @@ use cp_template::*;
 #[allow(unused_imports)]
 use graph::*;
 #[allow(unused_imports)]
-use input::*;
-#[allow(unused_imports)]
 use math::*;
 #[allow(unused_imports)]
 use modint::*;
@@ -17,10 +15,8 @@ use ordfloat::*;
 use prime_number::*;
 #[allow(unused_imports)]
 use vectools::*;
+#[allow(unused_imports)]
+use input::*;
 
 fn main() {
-    let a = OrdFloat(2.0);
-    let b = OrdFloat(5.0);
-
-    p(*std::cmp::max(a, b));
 }
