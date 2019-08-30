@@ -21,3 +21,7 @@ pub use math::*;
 ///配列に関する補助関数ライブラリ
 pub mod vectools;
 pub use vectools::*;
+
+/// Ordを実装したf64ラッパー
+pub mod ordfloat;
+pub use ordfloat::*;
