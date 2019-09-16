@@ -63,30 +63,28 @@ pub fn bellman_ford(graph: &Vec<Vec<(usize, isize)>>, dist: &mut Vec<Option<isiz
 
 ///最短経路計算(ダイクストラ法)
 ///
-///最短経路が格納された配列を返す。
+///最短経路が格納された配列を返す。(到達できない場合はisize::max_value()を返す。)
 ///
 ///graph:グラフ情報(隣接リスト)
 ///
 ///start:始点
-pub fn dijkstra(graph: &Vec<Vec<(usize, isize)>>, start: usize) -> Vec<Option<isize>> {
+
+pub fn dijkstra(graph: &Vec<Vec<(usize, isize)>>, start: usize) -> Vec<isize> {
     let mut heap = BinaryHeap::new();
-    let mut dist = vec![None; graph.len()];
-    dist[start] = Some(0);
-    for e in &graph[start] {
-        heap.push((dist[start].unwrap() - 1 * e.1, e.0));
-    }
+    let mut dist = vec![isize::max_value(); graph.len()];
+    dist[start] = 0;
+
+    heap.push((0, start));
 
     while !heap.is_empty() {
         let e = heap.pop().unwrap();
-        if let Some(x) = dist[e.1] {
-            if x < -1 * e.0 {
-                continue;
-            }
+        if -1 * e.0 > dist[e.1] {
+            continue;
         }
-        dist[e.1] = Some(-1 * e.0);
         for next_e in &graph[e.1] {
-            if dist[next_e.0] == None {
-                heap.push(((-1 * (dist[e.1].unwrap() + next_e.1)), next_e.0));
+            if dist[next_e.0] > next_e.1 + dist[e.1] {
+                dist[next_e.0] = next_e.1 + dist[e.1];
+                heap.push(((-1 * (dist[e.1] + next_e.1)), next_e.0));
             }
         }
     }
