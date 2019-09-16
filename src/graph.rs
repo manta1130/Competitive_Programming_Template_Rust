@@ -14,11 +14,11 @@ use std::collections::BinaryHeap;
 ///dist:最短経路を格納する配列
 ///
 ///事前に始点には0を入れ、その他はNoneで初期化する必要がある。
-pub fn bellman_ford(graph: &Vec<Vec<(usize, isize)>>, dist: &mut Vec<Option<isize>>) -> bool {
+pub fn bellman_ford(graph: &Vec<Vec<(usize, isize)>>, dist: &mut Vec<Option<isize>>) -> Vec<bool> {
     //負の閉路検出用
-    let mut neg_flag = false;
+    let mut neg_flag = vec![false; dist.len()];
+
     for _ in 0..graph.len() {
-        neg_flag = false;
         for (from, v) in graph.iter().enumerate() {
             for e in v {
                 let cost = e.1;
@@ -28,10 +28,32 @@ pub fn bellman_ford(graph: &Vec<Vec<(usize, isize)>>, dist: &mut Vec<Option<isiz
                         dist[to] = Some(x + cost);
                     } else if let Some(y) = dist[to] {
                         if y > x + cost {
-                            neg_flag = true;
                             dist[to] = Some(x + cost);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    for _ in 0..graph.len() {
+        for (from, v) in graph.iter().enumerate() {
+            for e in v {
+                let cost = e.1;
+                let to = e.0;
+                if let Some(x) = dist[from] {
+                    if let None = dist[to] {
+                        dist[to] = Some(x + cost);
+                        neg_flag[to] = true;
+                    } else if let Some(y) = dist[to] {
+                        if y > x + cost {
+                            dist[to] = Some(x + cost);
+                            neg_flag[to] = true;
+                        }
+                    }
+                }
+                if neg_flag[from] {
+                    neg_flag[to] = true;
                 }
             }
         }
