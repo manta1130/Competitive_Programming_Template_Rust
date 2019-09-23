@@ -16,6 +16,8 @@ use prime_number::*;
 #[allow(unused_imports)]
 use vectools::*;
 #[allow(unused_imports)]
+use union_find::*;
+#[allow(unused_imports)]
 use input::*;
 
 fn main() {

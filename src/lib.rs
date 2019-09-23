@@ -25,3 +25,7 @@ pub use vectools::*;
 /// Ordを実装したf64ラッパー
 pub mod ordfloat;
 pub use ordfloat::*;
+
+///素集合データ集合
+pub mod union_find;
+pub use union_find::*;

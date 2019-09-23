@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["UnionFind","素集合データ構造"]]});
