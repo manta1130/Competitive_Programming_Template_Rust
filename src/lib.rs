@@ -29,3 +29,7 @@ pub use ordfloat::*;
 ///素集合データ集合
 pub mod union_find;
 pub use union_find::*;
+
+/// セグメント木
+pub mod segtree;
+pub use segtree::*;
