@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SegTreeBasic","汎用のセグメント木"]]});
