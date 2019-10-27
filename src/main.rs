@@ -4,6 +4,8 @@ use cp_template::*;
 
 //提出用
 #[allow(unused_imports)]
+use binary_indexed_tree::*;
+#[allow(unused_imports)]
 use graph::*;
 #[allow(unused_imports)]
 use math::*;
@@ -23,6 +25,4 @@ use vectools::*;
 #[allow(unused_imports)]
 use input::*;
 
-fn main() {
-    
-}
+fn main() {}

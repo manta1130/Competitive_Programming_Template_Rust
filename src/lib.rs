@@ -33,3 +33,7 @@ pub use union_find::*;
 /// セグメント木
 pub mod segtree;
 pub use segtree::*;
+
+///BIT
+pub mod binary_indexed_tree;
+pub use binary_indexed_tree::*;
