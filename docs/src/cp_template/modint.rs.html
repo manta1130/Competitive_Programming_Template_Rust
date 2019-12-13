@@ -224,14 +224,6 @@
 <span id="224">224</span>
 <span id="225">225</span>
 <span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">//mod modint {</span>
 
@@ -241,22 +233,19 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">str</span>::<span class="ident">FromStr</span>;
 
+<span class="kw">type</span> <span class="ident">ValueType</span> <span class="op">=</span> <span class="ident">u64</span>;
+<span class="kw">const</span> <span class="ident">MODNUM</span>: <span class="ident">ValueType</span> <span class="op">=</span> <span class="number">1_000_000_007</span>;
+
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Modint</span> {
-    <span class="ident">p</span>: <span class="ident">usize</span>, <span class="comment">//</span>
-    <span class="ident">v</span>: <span class="ident">usize</span>,
+    <span class="ident">p</span>: <span class="ident">ValueType</span>,
+    <span class="ident">v</span>: <span class="ident">ValueType</span>,
 }
-
-<span class="kw">const</span> <span class="ident">DEFAULT_MODNUM</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1_000_000_007</span>;
 
 <span class="kw">impl</span> <span class="ident">Modint</span> {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">p</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Modint</span> {
-        <span class="ident">Modint</span> { <span class="ident">p</span>: <span class="ident">p</span>, <span class="ident">v</span>: <span class="number">0</span> }
-    }
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">p</span>: <span class="ident">usize</span>, <span class="ident">v</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Modint</span> {
-        <span class="ident">Modint</span> { <span class="ident">p</span>: <span class="ident">p</span>, <span class="ident">v</span>: <span class="ident">v</span> <span class="op">%</span> <span class="ident">p</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">i</span>: <span class="ident">ValueType</span>) <span class="op">-&gt;</span> <span class="ident">Modint</span> {
+        <span class="ident">Modint</span> { <span class="ident">p</span>: <span class="ident">MODNUM</span>, <span class="ident">v</span>: <span class="ident">i</span> }
     }
 }
 
@@ -264,12 +253,9 @@
     <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> <span class="ident">ParseIntError</span>;
 
     <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="self">Self</span>::<span class="prelude-val">Err</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">num</span>: <span class="ident">usize</span>;
+        <span class="kw">let</span> <span class="ident">num</span>: <span class="ident">ValueType</span>;
         <span class="ident">num</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">Modint</span> {
-            <span class="ident">p</span>: <span class="ident">DEFAULT_MODNUM</span>,
-            <span class="ident">v</span>: <span class="ident">num</span>,
-        })
+        <span class="prelude-val">Ok</span>(<span class="ident">Modint</span> { <span class="ident">p</span>: <span class="ident">MODNUM</span>, <span class="ident">v</span>: <span class="ident">num</span> })
     }
 }
 
@@ -344,14 +330,14 @@
 
 <span class="kw">impl</span> <span class="ident">Modint</span> {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">ValueType</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">+=</span> <span class="ident">n</span>;
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">%=</span> <span class="self">self</span>.<span class="ident">p</span>;
         <span class="self">self</span>
     }
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sub_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sub_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">n</span>: <span class="ident">ValueType</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
         <span class="ident">n</span> <span class="op">=</span> <span class="ident">n</span> <span class="op">%</span> <span class="self">self</span>.<span class="ident">p</span>;
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">+=</span> <span class="self">self</span>.<span class="ident">p</span>;
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">-=</span> <span class="ident">n</span>;
@@ -360,15 +346,15 @@
     }
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mul_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mul_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">ValueType</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">*=</span> <span class="ident">n</span>;
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">%=</span> <span class="self">self</span>.<span class="ident">p</span>;
         <span class="self">self</span>
     }
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">div_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">obj</span> <span class="op">=</span> <span class="ident">Modint</span>::<span class="ident">from</span>(<span class="self">self</span>.<span class="ident">p</span>, <span class="ident">n</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">div_uint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">ValueType</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">obj</span> <span class="op">=</span> <span class="ident">Modint</span>::<span class="ident">new</span>(<span class="ident">n</span>);
         <span class="ident">obj</span>.<span class="ident">inv</span>();
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">*=</span> <span class="ident">obj</span>.<span class="ident">v</span>;
         <span class="self">self</span>.<span class="ident">v</span> <span class="op">%=</span> <span class="self">self</span>.<span class="ident">p</span>;
@@ -378,7 +364,7 @@
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">p</span>;
-        <span class="self">self</span>.<span class="ident">pow</span>(<span class="ident">p</span> <span class="op">-</span> <span class="number">2</span>);
+        <span class="self">self</span>.<span class="ident">pow</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="number">2</span>);
         <span class="self">self</span>
     }
 
@@ -399,26 +385,24 @@
     }
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ValueType</span> {
         <span class="self">self</span>.<span class="ident">v</span>
     }
 }
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DPFactorial</span> {
-    <span class="ident">p</span>: <span class="ident">usize</span>,
     <span class="ident">normal</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Modint</span><span class="op">&gt;</span>,
     <span class="ident">inv</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Modint</span><span class="op">&gt;</span>,
 }
 <span class="kw">impl</span> <span class="ident">DPFactorial</span> {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">p</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">DPFactorial</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">DPFactorial</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">obj</span> <span class="op">=</span> <span class="ident">DPFactorial</span> {
-            <span class="ident">p</span>: <span class="ident">p</span>,
             <span class="ident">normal</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
             <span class="ident">inv</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
         };
-        <span class="ident">obj</span>.<span class="ident">normal</span>.<span class="ident">push</span>(<span class="ident">Modint</span>::<span class="ident">from</span>(<span class="ident">p</span>, <span class="number">1</span>));
-        <span class="ident">obj</span>.<span class="ident">inv</span>.<span class="ident">push</span>(<span class="ident">Modint</span>::<span class="ident">from</span>(<span class="ident">p</span>, <span class="number">1</span>));
+        <span class="ident">obj</span>.<span class="ident">normal</span>.<span class="ident">push</span>(<span class="ident">Modint</span>::<span class="ident">new</span>(<span class="number">1</span>));
+        <span class="ident">obj</span>.<span class="ident">inv</span>.<span class="ident">push</span>(<span class="ident">Modint</span>::<span class="ident">new</span>(<span class="number">1</span>));
         <span class="ident">obj</span>
     }
 
@@ -427,8 +411,8 @@
         <span class="kw">if</span> <span class="ident">n</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">normal</span>.<span class="ident">len</span>() {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">normal</span>[<span class="ident">n</span>].<span class="ident">clone</span>();
         }
-        <span class="kw">for</span> <span class="ident">z</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">normal</span>.<span class="ident">len</span>()..<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Modint</span>::<span class="ident">from</span>(<span class="self">self</span>.<span class="ident">p</span>, <span class="ident">z</span>);
+        <span class="kw">for</span> <span class="ident">z</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">normal</span>.<span class="ident">len</span>()..<span class="ident">n</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span> {
+            <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Modint</span>::<span class="ident">new</span>(<span class="ident">z</span> <span class="kw">as</span> <span class="ident">ValueType</span>);
             <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">buf</span> <span class="op">*</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">normal</span>[<span class="ident">z</span> <span class="op">-</span> <span class="number">1</span>];
 
             <span class="self">self</span>.<span class="ident">normal</span>.<span class="ident">push</span>(<span class="ident">buf</span>);
@@ -442,7 +426,7 @@
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">inv</span>[<span class="ident">n</span>].<span class="ident">clone</span>();
         }
         <span class="kw">for</span> <span class="ident">z</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">inv</span>.<span class="ident">len</span>()..<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Modint</span>::<span class="ident">from</span>(<span class="self">self</span>.<span class="ident">p</span>, <span class="ident">z</span>);
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Modint</span>::<span class="ident">new</span>(<span class="ident">z</span> <span class="kw">as</span> <span class="ident">ValueType</span>);
             <span class="ident">buf</span>.<span class="ident">inv</span>();
             <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">buf</span> <span class="op">*</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inv</span>[<span class="ident">z</span> <span class="op">-</span> <span class="number">1</span>];
             <span class="self">self</span>.<span class="ident">inv</span>.<span class="ident">push</span>(<span class="ident">buf</span>);
@@ -453,7 +437,7 @@
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_combination</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>, <span class="ident">r</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Modint</span> {
         <span class="kw">if</span> <span class="ident">n</span> <span class="op">&lt;</span> <span class="ident">r</span> {
-            <span class="kw">return</span> <span class="ident">Modint</span>::<span class="ident">from</span>(<span class="self">self</span>.<span class="ident">p</span>, <span class="number">0</span>);
+            <span class="kw">return</span> <span class="ident">Modint</span>::<span class="ident">new</span>(<span class="number">0</span>);
         }
         <span class="kw-2">&amp;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">get_factorial</span>(<span class="ident">n</span>) <span class="op">*</span> <span class="kw-2">&amp;</span>(<span class="self">self</span>.<span class="ident">get_factorial_inv</span>(<span class="ident">n</span> <span class="op">-</span> <span class="ident">r</span>))) <span class="op">*</span> <span class="kw-2">&amp;</span>(<span class="self">self</span>.<span class="ident">get_factorial_inv</span>(<span class="ident">r</span>))
     }
@@ -461,7 +445,7 @@
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_permutation</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>, <span class="ident">r</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Modint</span> {
         <span class="kw">if</span> <span class="ident">n</span> <span class="op">&lt;</span> <span class="ident">r</span> {
-            <span class="kw">return</span> <span class="ident">Modint</span>::<span class="ident">from</span>(<span class="self">self</span>.<span class="ident">p</span>, <span class="number">0</span>);
+            <span class="kw">return</span> <span class="ident">Modint</span>::<span class="ident">new</span>(<span class="number">0</span>);
         }
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">get_factorial</span>(<span class="ident">n</span>) <span class="op">*</span> <span class="kw-2">&amp;</span>(<span class="self">self</span>.<span class="ident">get_factorial_inv</span>(<span class="ident">n</span> <span class="op">-</span> <span class="ident">r</span>))
     }
