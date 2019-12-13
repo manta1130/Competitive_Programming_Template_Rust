@@ -38,6 +38,6 @@ pub use segtree::*;
 pub mod binary_indexed_tree;
 pub use binary_indexed_tree::*;
 
-//Rolling Hash
-pub mod rollling_hash;
-pub use rollling_hash::*;
+///Rolling Hash
+pub mod rolling_hash;
+pub use rolling_hash::*;

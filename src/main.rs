@@ -16,6 +16,8 @@ use ordfloat::*;
 #[allow(unused_imports)]
 use prime_number::*;
 #[allow(unused_imports)]
+use rolling_hash::*;
+#[allow(unused_imports)]
 use segtree::*;
 #[allow(unused_imports)]
 use union_find::*;
