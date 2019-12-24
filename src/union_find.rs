@@ -4,6 +4,7 @@
 ///素集合データ構造
 pub struct UnionFind {
     v: Vec<usize>,
+    h: Vec<usize>,
 }
 
 impl UnionFind {
@@ -13,7 +14,8 @@ impl UnionFind {
         for i in 0..n {
             v.push(i);
         }
-        UnionFind { v: v }
+        let h = vec![1; n];
+        UnionFind { v: v, h: h }
     }
 
     ///親を探索する。
@@ -37,7 +39,15 @@ impl UnionFind {
     pub fn union(&mut self, a: usize, b: usize) {
         let parent_a = self.find(a);
         let parent_b = self.find(b);
-        self.v[parent_a] = parent_b;
+        if self.h[parent_a] < self.h[parent_b] {
+            self.v[parent_a] = parent_b;
+        } else {
+            self.v[parent_b] = parent_a;
+
+            if self.h[parent_a] == self.h[parent_b] {
+                self.h[parent_a] += 1;
+            }
+        }
     }
 }
 //}
