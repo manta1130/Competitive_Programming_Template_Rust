@@ -21,25 +21,6 @@
             },
             "args": [],
             "cwd": "${workspaceFolder}"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Debug unit tests in executable 'cp_template'",
-            "cargo": {
-                "args": [
-                    "test",
-                    "--no-run",
-                    "--bin=cp_template",
-                    "--package=cp_template"
-                ],
-                "filter": {
-                    "name": "cp_template",
-                    "kind": "bin"
-                }
-            },
-            "args": [],
-            "cwd": "${workspaceFolder}"
         }
     ]
 }
