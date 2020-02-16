@@ -6,5 +6,4 @@ implementors["cp_template"] = [{text:"impl&lt;'a&gt; <a class=\"trait\" href=\"h
             } else {
                 window.pending_implementors = implementors;
             }
-        
-})()
+        })()

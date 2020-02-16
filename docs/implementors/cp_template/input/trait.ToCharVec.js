@@ -6,5 +6,4 @@ implementors["cp_template"] = [];
             } else {
                 window.pending_implementors = implementors;
             }
-        
-})()
+        })()

@@ -6,6 +6,8 @@ use cp_template::*;
 #[allow(unused_imports)]
 use binary_indexed_tree::*;
 #[allow(unused_imports)]
+use flow::*;
+#[allow(unused_imports)]
 use graph::*;
 #[allow(unused_imports)]
 use math::*;
