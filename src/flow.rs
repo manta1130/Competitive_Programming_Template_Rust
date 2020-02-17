@@ -23,6 +23,7 @@ pub struct Dinic {
 
 impl Dinic {
     ///要素数nのグラフを構築する。
+    #[warn(dead_code)]
     pub fn new(n: usize) -> Dinic {
         let res = Dinic {
             n: n,
@@ -32,6 +33,7 @@ impl Dinic {
         };
         res
     }
+    #[warn(dead_code)]
     fn bfs(&mut self, s: usize) {
         self.level = vec![-1; self.n];
         let mut que = VecDeque::new();
@@ -48,6 +50,7 @@ impl Dinic {
             }
         }
     }
+    #[warn(dead_code)]
     fn dfs(&mut self, k: usize, t: usize, f: CapValue) -> CapValue {
         if k == t {
             return f;
@@ -67,6 +70,7 @@ impl Dinic {
         0
     }
     ///最大フローを求める。
+    #[warn(dead_code)]
     pub fn get_maxflow(&mut self, s: usize, t: usize) -> CapValue {
         let mut res = 0;
         loop {
@@ -87,6 +91,7 @@ impl Dinic {
     ///辺の追加
     ///
     /// f->tにvalueの容量を持つ辺を追加する。
+    #[warn(dead_code)]
     pub fn add_edge(&mut self, f: usize, t: usize, value: CapValue) {
         let idx_t = self.g[t].len();
         let idx_f = self.g[f].len();
@@ -112,6 +117,7 @@ pub struct FordFulkerson {
 
 impl FordFulkerson {
     ///要素数nのグラフを構築する。
+    #[warn(dead_code)]
     pub fn new(n: usize) -> FordFulkerson {
         let res = FordFulkerson {
             n: n,
@@ -120,6 +126,7 @@ impl FordFulkerson {
         };
         res
     }
+    #[warn(dead_code)]
     fn dfs(&mut self, k: usize, t: usize, f: CapValue) -> CapValue {
         if k == t {
             return f;
@@ -140,6 +147,7 @@ impl FordFulkerson {
         0
     }
     ///最大フローを求める。
+    #[warn(dead_code)]
     pub fn get_maxflow(&mut self, s: usize, t: usize) -> CapValue {
         let mut res = 0;
         loop {
@@ -154,6 +162,7 @@ impl FordFulkerson {
     ///辺の追加
     ///
     /// f->tにvalueの容量を持つ辺を追加する。
+    #[warn(dead_code)]
     pub fn add_edge(&mut self, f: usize, t: usize, value: CapValue) {
         let idx_t = self.g[t].len();
         let idx_f = self.g[f].len();
