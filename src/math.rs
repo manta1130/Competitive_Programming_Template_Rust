@@ -7,18 +7,18 @@ use std::default;
 use std::ops;
 
 ///最大公約数を求める。
-pub fn gcd<T>(a: T, b: T) -> T
+pub fn getgcd<T>(a: T, b: T) -> T
 where
     T: ops::Add<Output = T> + ops::Rem<Output = T> + ops::Div<Output = T> + cmp::PartialEq + Copy,
 {
     if b + b == b {
         return a;
     }
-    gcd(b, a % b)
+    getgcd(b, a % b)
 }
 
 ///最小公倍数を求める。
-pub fn lcm<T>(a: T, b: T) -> T
+pub fn getlcm<T>(a: T, b: T) -> T
 where
     T: ops::Add<Output = T>
         + ops::Rem<Output = T>
@@ -27,7 +27,7 @@ where
         + cmp::PartialEq
         + Copy,
 {
-    (a / gcd(a, b)) * b
+    (a / getgcd(a, b)) * b
 }
 
 ///拡張ユーグリッドの互除法
