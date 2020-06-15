@@ -19,7 +19,7 @@ impl PrimeFactorization {
         PrimeFactorization {
             n: n,
             cur: 1,
-            limit: (n as f64).sqrt() as ValueType + 1,
+            limit: n,
         }
     }
 }
@@ -34,7 +34,7 @@ impl Iterator for PrimeFactorization {
 
             self.cur += 1;
 
-            if self.cur > self.limit {
+            if self.cur * self.cur > self.limit {
                 if self.n != 1 {
                     self.cur = 0;
                     return Some(self.n);
