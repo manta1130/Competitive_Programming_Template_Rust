@@ -1,0 +1,18 @@
+{
+	"1e9+7": {
+		"prefix": "1e9+7",
+		"body": "1_000_000_007"
+	},
+	"chmax": {
+		"prefix": "chmax",
+		"body": "$1 = std::cmp::max($1,$2);"
+	},
+	"chmin": {
+		"prefix": "chmin",
+		"body": "$1 = std::cmp::min($1,$2);"
+	},
+	"swap": {
+		"prefix": "swap",
+		"body": "std::mem::swap(&mut $1,&mut $2);"
+	}
+}
