@@ -45,3 +45,7 @@ pub use rolling_hash::*;
 ///フロー
 pub mod flow;
 pub use flow::*;
+
+///Z-Algorithm
+pub mod z_algorithm;
+pub use z_algorithm::*;
