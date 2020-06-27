@@ -1,0 +1,20 @@
+{
+	"BufWriter Include": {
+		"prefix": "bufferoutinclude",
+		"body": [
+			"#[allow(unused_imports)]",
+			"use std::io::{BufWriter,stdout,Write};"
+		]
+	},
+	"BufWriter for stdout": {
+		"prefix": "bufferout",
+		"body": [
+			"let ${1:out} = stdout();",
+			"let mut $1 = BufWriter::new($1.lock());"
+		]
+	},
+	"writeln macro": {
+		"prefix": "writeln",
+		"body": "writeln!(${1:out},\"$2\").unwrap();"
+	}
+}
