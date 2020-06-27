@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["FordFulkerson","最大流を計算(Ford-Fulkersonのアルゴリズム)"]]});
+initSidebarItems({"struct":[["Dinic","最大流を計算(Dinicのアルゴリズム)"],["FordFulkerson","最大流を計算(Ford-Fulkersonのアルゴリズム)"]]});

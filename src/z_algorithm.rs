@@ -2,6 +2,9 @@
 //mod z_algorithm {
 
 #[allow(dead_code)]
+///Z-Algorithm
+///
+/// 文字列の任意の部分からの最長共通接頭辞の長さを求める
 pub fn z_algorithm(s: &str) -> Vec<usize> {
     let mut res = vec![0; s.len()];
 
