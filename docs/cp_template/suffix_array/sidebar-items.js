@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SuffixArray","SuffixArrayの計算を行う(Manber&Myersのアルゴリズム)"]]});
