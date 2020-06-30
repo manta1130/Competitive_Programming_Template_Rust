@@ -49,3 +49,7 @@ pub use flow::*;
 ///Z-Algorithm
 pub mod z_algorithm;
 pub use z_algorithm::*;
+
+///Suffix Array
+pub mod suffix_array;
+pub use suffix_array::*;

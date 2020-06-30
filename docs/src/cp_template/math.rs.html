@@ -30,30 +30,6 @@
 <span id="30">30</span>
 <span id="31">31</span>
 <span id="32">32</span>
-<span id="33">33</span>
-<span id="34">34</span>
-<span id="35">35</span>
-<span id="36">36</span>
-<span id="37">37</span>
-<span id="38">38</span>
-<span id="39">39</span>
-<span id="40">40</span>
-<span id="41">41</span>
-<span id="42">42</span>
-<span id="43">43</span>
-<span id="44">44</span>
-<span id="45">45</span>
-<span id="46">46</span>
-<span id="47">47</span>
-<span id="48">48</span>
-<span id="49">49</span>
-<span id="50">50</span>
-<span id="51">51</span>
-<span id="52">52</span>
-<span id="53">53</span>
-<span id="54">54</span>
-<span id="55">55</span>
-<span id="56">56</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">//提出時は下と一番下のコメントアウトを外す。</span>
 <span class="comment">//mod math {</span>
@@ -62,30 +38,6 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">default</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>;
-
-<span class="doccomment">///最大公約数を求める。</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">getgcd</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="ident">T</span>, <span class="ident">b</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">ops</span>::<span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ops</span>::<span class="ident">Rem</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ops</span>::<span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">cmp</span>::<span class="ident">PartialEq</span> <span class="op">+</span> <span class="ident">Copy</span>,
-{
-    <span class="kw">if</span> <span class="ident">b</span> <span class="op">+</span> <span class="ident">b</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b</span> {
-        <span class="kw">return</span> <span class="ident">a</span>;
-    }
-    <span class="ident">getgcd</span>(<span class="ident">b</span>, <span class="ident">a</span> <span class="op">%</span> <span class="ident">b</span>)
-}
-
-<span class="doccomment">///最小公倍数を求める。</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">getlcm</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="ident">T</span>, <span class="ident">b</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">ops</span>::<span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
-        <span class="op">+</span> <span class="ident">ops</span>::<span class="ident">Rem</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
-        <span class="op">+</span> <span class="ident">ops</span>::<span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
-        <span class="op">+</span> <span class="ident">ops</span>::<span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
-        <span class="op">+</span> <span class="ident">cmp</span>::<span class="ident">PartialEq</span>
-        <span class="op">+</span> <span class="ident">Copy</span>,
-{
-    (<span class="ident">a</span> <span class="op">/</span> <span class="ident">getgcd</span>(<span class="ident">a</span>, <span class="ident">b</span>)) <span class="op">*</span> <span class="ident">b</span>
-}
 
 <span class="doccomment">///拡張ユーグリッドの互除法</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extgcd</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="ident">T</span>, <span class="ident">b</span>: <span class="ident">T</span>, <span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
