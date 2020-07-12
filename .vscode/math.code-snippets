@@ -33,5 +33,27 @@
 	"lcm": {
 		"prefix": "lcm",
 		"body": "($1 / ${3:gcd}($1, $2)) * $2;"
+	},
+	"modpow": {
+		"prefix": "modpow",
+		"body": [
+			"fn modpow(mut s: ${1:usize}, mut n: $1, p: $1) -> $1 {",
+			"if p == 0 {",
+			"return 1;",
+			"}",
+			"let mut t = s;",
+			"s = 1;",
+			"while n > 0 {",
+			"if n & 1 != 0 {",
+			"s *= t;",
+			"s %= p;",
+			"}",
+			"n >>= 1;",
+			"t *= t;",
+			"t %= p;",
+			"}",
+			"s",
+			"}",
+		]
 	}
 }
