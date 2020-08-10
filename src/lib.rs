@@ -53,3 +53,7 @@ pub use z_algorithm::*;
 ///Suffix Array
 pub mod suffix_array;
 pub use suffix_array::*;
+
+///FFT
+pub mod fft;
+pub use fft::*;
