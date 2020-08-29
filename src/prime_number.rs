@@ -9,18 +9,13 @@ type ValueType = usize;
 pub struct PrimeFactorization {
     n: ValueType,
     cur: ValueType,
-    limit: ValueType,
 }
 
 ///素因数分解
 impl PrimeFactorization {
     ///素因数を計算するイテレータを返す。
     pub fn calc(n: ValueType) -> PrimeFactorization {
-        PrimeFactorization {
-            n: n,
-            cur: 1,
-            limit: n,
-        }
+        PrimeFactorization { n: n, cur: 1 }
     }
 }
 
@@ -34,7 +29,7 @@ impl Iterator for PrimeFactorization {
 
             self.cur += 1;
 
-            if self.cur * self.cur > self.limit {
+            if self.cur * self.cur > self.n {
                 if self.n != 1 {
                     self.cur = 0;
                     return Some(self.n);
