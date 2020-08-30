@@ -75,6 +75,7 @@ pub struct SegTreeLazy<T, F, G, H> {
     //n: usize,
     v: Vec<T>,
     lazy: Vec<T>,
+    lazy_flag: Vec<bool>,
     init: T,
     lazy_init: T,
     lazy_convert: F,
@@ -110,11 +111,13 @@ where
         }
         let v = vec![init; size * 2 - 1];
         let lazy = vec![init; size * 2 - 1];
+        let lazy_flag = vec![false; size * 2 - 1];
         SegTreeLazy {
             v: v,
             lazy: lazy,
             init: init,
             lazy_init: lazy_init,
+            lazy_flag: lazy_flag,
             lazy_convert: lazy_convert,
             lazy_propagation: lazy_propagation,
             parent_generator: parent_generator,
@@ -127,17 +130,34 @@ where
         self._get(l, r, 0, 0, (vlen + 1) / 2)
     }
 
-    fn _get(&mut self, l: usize, r: usize, now: usize, a: usize, b: usize) -> T {
-        let propagation = &self.lazy_propagation;
-        let convert = &self.lazy_convert;
-        if now < self.lazy.len() && self.lazy[now] != self.lazy_init {
-            if now * 2 + 2 < self.lazy.len() {
-                self.v[now * 2 + 1] = propagation(self.v[now * 2 + 1], self.lazy[now]);
-                self.v[now * 2 + 2] = propagation(self.v[now * 2 + 2], self.lazy[now]);
-            }
-            self.v[now] = convert(self.v[now], self.lazy[now]);
-            self.lazy[now] = self.lazy_init;
+    fn _eval(&mut self, now: usize) {
+        if now >= self.lazy_flag.len() {
+            return;
         }
+
+        if now * 2 + 2 < self.lazy.len() {
+            let propagation = &self.lazy_propagation;
+            self.lazy[now * 2 + 1] = propagation(self.lazy[now * 2 + 1], self.lazy[now]);
+            self.lazy[now * 2 + 2] = propagation(self.lazy[now * 2 + 2], self.lazy[now]);
+        }
+        {
+            let convert = &self.lazy_convert;
+            self.v[now] = convert(self.v[now], self.lazy[now]);
+        }
+        self.lazy[now] = self.lazy_init;
+        if self.lazy_flag[now] {
+            self._eval(now * 2 + 1);
+            self._eval(now * 2 + 2);
+            let generator = &self.parent_generator;
+            if now * 2 + 2 < self.v.len() {
+                self.v[now] = generator(self.v[now * 2 + 1], self.v[now * 2 + 2]);
+            }
+        }
+        self.lazy_flag[now] = false;
+    }
+
+    fn _get(&mut self, l: usize, r: usize, now: usize, a: usize, b: usize) -> T {
+        self._eval(now);
         if a >= r || b <= l {
             self.init
         } else if l <= a && b <= r {
@@ -157,23 +177,19 @@ where
     }
 
     fn _update(&mut self, l: usize, r: usize, now: usize, a: usize, b: usize, v: T) {
-        let propagation = &self.lazy_propagation;
-        let convert = &self.lazy_convert;
-        if now < self.lazy.len() && self.lazy[now] != self.lazy_init {
-            if now * 2 + 2 < self.lazy.len() {
-                self.v[now * 2 + 1] = propagation(self.v[now * 2 + 1], self.lazy[now]);
-                self.v[now * 2 + 2] = propagation(self.v[now * 2 + 2], self.lazy[now]);
-            }
-            self.v[now] = convert(self.v[now], self.lazy[now]);
-            self.lazy[now] = self.lazy_init;
-        }
         if l <= a && b <= r {
-            self.lazy[now] = propagation(self.lazy[now], v);
-        } else if !(a >= r || b <= l) {
             let propagation = &self.lazy_propagation;
-            let next_v = propagation(self.lazy_init, v);
-            self._update(l, r, now * 2 + 1, a, (a + b) / 2, next_v);
-            self._update(l, r, now * 2 + 2, (a + b) / 2, b, next_v);
+            self.lazy[now] = propagation(self.lazy[now], v);
+            self.lazy_flag[now] = true;
+        } else if !(a >= r || b <= l) {
+            let v_next;
+            {
+                let propagation = &self.lazy_propagation;
+                v_next = propagation(self.lazy_init, v);
+            }
+            self._update(l, r, now * 2 + 1, a, (a + b) / 2, v_next);
+            self._update(l, r, now * 2 + 2, (a + b) / 2, b, v_next);
+            self.lazy_flag[now] = true;
         }
     }
 }
