@@ -110,7 +110,7 @@ where
             size *= 2;
         }
         let v = vec![init; size * 2 - 1];
-        let lazy = vec![init; size * 2 - 1];
+        let lazy = vec![lazy_init; size * 2 - 1];
         let lazy_flag = vec![false; size * 2 - 1];
         SegTreeLazy {
             v: v,
@@ -135,12 +135,12 @@ where
             return;
         }
 
-        if now * 2 + 2 < self.lazy.len() {
+        if now * 2 + 2 < self.lazy.len() && self.lazy[now] != self.lazy_init {
             let propagation = &self.lazy_propagation;
             self.lazy[now * 2 + 1] = propagation(self.lazy[now * 2 + 1], self.lazy[now]);
             self.lazy[now * 2 + 2] = propagation(self.lazy[now * 2 + 2], self.lazy[now]);
         }
-        {
+        if self.lazy[now] != self.lazy_init {
             let convert = &self.lazy_convert;
             self.v[now] = convert(self.v[now], self.lazy[now]);
         }
@@ -177,6 +177,9 @@ where
     }
 
     fn _update(&mut self, l: usize, r: usize, now: usize, a: usize, b: usize, v: T) {
+        if now < self.v.len() {
+            self._eval(now);
+        }
         if l <= a && b <= r {
             let propagation = &self.lazy_propagation;
             self.lazy[now] = propagation(self.lazy[now], v);
