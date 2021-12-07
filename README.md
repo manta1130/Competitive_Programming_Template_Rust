@@ -1,5 +1,7 @@
 # Competitive_Programming_Template_Rust
-Rustの競技プログラミング用ライブラリ。
+以前使っていたRustの競技プログラミング用ライブラリです。
 使いたい方はご自由にどうぞ。
 
-ドキュメント:https://manta1130.github.io/Competitive_Programming_Template_Rust/cp_template/
+
+# 現在は[competitive-template-rs](https://github.com/manta1130/competitive-template-rs)に移行しました。
+
